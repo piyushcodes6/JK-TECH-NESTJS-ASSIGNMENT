@@ -10,7 +10,7 @@ import { CreateDocumentDto } from './dto/create-document.dto';
 import { UpdateDocumentDto } from './dto/update-document.dto';
 import { UsersService } from '../users/users.service';
 import { ConfigService } from '@nestjs/config';
-import { Express } from 'express';
+import { Express, Response } from 'express';
 
 const mkdir = promisify(fs.mkdir);
 const writeFile = promisify(fs.writeFile);
@@ -130,6 +130,27 @@ export class DocumentsService {
     
     await this.documentsRepository.remove(document);
     return { id, deleted: true };
+  }
+
+  async streamDocument(id: string, response: Response) {
+    const document = await this.findById(id);
+    const filePath = path.join(this.uploadDir, document.filePath);
+    
+    if (!fs.existsSync(filePath)) {
+      throw new NotFoundException('Document file not found');
+    }
+
+    // Set appropriate headers
+    response.setHeader('Content-Type', document.metadata.fileType);
+    response.setHeader('Content-Disposition', `inline; filename="${document.metadata.originalName}"`);
+    
+    // Stream the file
+    const fileStream = fs.createReadStream(filePath);
+    return new Promise((resolve, reject) => {
+      fileStream.pipe(response)
+        .on('finish', resolve)
+        .on('error', reject);
+    });
   }
 }
 
