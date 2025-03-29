@@ -16,6 +16,7 @@ import {
   BadRequestException,
   HttpCode,
   HttpStatus,
+  Response,
 } from '@nestjs/common';
 import { FileInterceptor } from '@nestjs/platform-express';
 // Import Express namespace for Multer types
@@ -154,6 +155,27 @@ export class DocumentsController {
     }
     
     return this.documentsService.remove(id);
+  }
+
+  @Get(':id/view')
+  @HttpCode(HttpStatus.OK)
+  async viewDocument(
+    @Param('id', ParseUUIDPipe) id: string,
+    @Request() req,
+    @Response() res,
+  ) {
+    const document = await this.documentsService.findById(id);
+    
+    // Check permissions similar to findOne
+    if (
+      req.user.role === UserRole.USER &&
+      document.createdById !== req.user.id &&
+      document.assignedToId !== req.user.id
+    ) {
+      throw new ForbiddenException('You do not have permission to access this document');
+    }
+    
+    return this.documentsService.streamDocument(id, res);
   }
 }
 
