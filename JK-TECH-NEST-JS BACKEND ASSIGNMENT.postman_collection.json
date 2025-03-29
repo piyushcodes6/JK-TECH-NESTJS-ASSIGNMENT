@@ -1,0 +1,274 @@
+{
+	"info": {
+		"_postman_id": "f078dfaf-122e-4554-825e-cbc45f070042",
+		"name": "NEST-JS BACKEND ASSIGNMENT",
+		"schema": "https://schema.getpostman.com/json/collection/v2.0.0/collection.json",
+		"_exporter_id": "36977106"
+	},
+	"item": [
+		{
+			"name": "REGISTER-API",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"piyushcodes6@gmail.com\",\n    \"password\": \"Admin1234!\",\n    \"firstName\": \"Piyush\",\n    \"lastName\": \"Goswami\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/auth/register"
+			},
+			"response": []
+		},
+		{
+			"name": "LOGIN-API",
+			"request": {
+				"auth": {
+					"type": "noauth"
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"email\": \"piyushcodes6@gmail.com\",\n    \"password\": \"Admin1234!\"\n}\n",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/auth/login"
+			},
+			"response": []
+		},
+		{
+			"name": "ME(GET_PROFILE)-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNTJlYTM5Ny02M2MxLTQ4YTItODhlYy1hOGY2MzA4NzFmZGIiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDMyNjY4MjIsImV4cCI6MTc0MzM1MzIyMn0.t3ILEkGus3wpmACQkwd5N0eAjtckcCkY-nygmynRgkI"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "",
+						"disabled": true
+					}
+				],
+				"url": "http://localhost:3000/users"
+			},
+			"response": []
+		},
+		{
+			"name": "UPDATE_PROFILE-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNTJlYTM5Ny02M2MxLTQ4YTItODhlYy1hOGY2MzA4NzFmZGIiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDMyNjY4MjIsImV4cCI6MTc0MzM1MzIyMn0.t3ILEkGus3wpmACQkwd5N0eAjtckcCkY-nygmynRgkI"
+					}
+				},
+				"method": "PATCH",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YOUR_JWT_TOKEN",
+						"disabled": true
+					},
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "// {\n//     \"firstName\": \"Wifey\",\n//     \"lastName\": \"Goswami\"\n// }\n\n{\n    \"role\":\"manager\"\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/users/bb460e6c-d719-4926-9ff9-065ef4ca4dd7"
+			},
+			"response": []
+		},
+		{
+			"name": "UPLOAD_DOCUMENTS-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNTJlYTM5Ny02M2MxLTQ4YTItODhlYy1hOGY2MzA4NzFmZGIiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDMyNjY4MjIsImV4cCI6MTc0MzM1MzIyMn0.t3ILEkGus3wpmACQkwd5N0eAjtckcCkY-nygmynRgkI"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YOUR_JWT_TOKEN",
+						"disabled": true
+					}
+				],
+				"body": {
+					"mode": "formdata",
+					"formdata": [
+						{
+							"key": "file",
+							"type": "file",
+							"src": "/Users/piyushgoswami/Documents/Cover Letter Orange.pdf"
+						},
+						{
+							"key": "title",
+							"value": "TEST DOC",
+							"type": "text"
+						},
+						{
+							"key": "description",
+							"value": "This is a test document",
+							"type": "text"
+						}
+					]
+				},
+				"url": "http://localhost:3000/documents"
+			},
+			"response": []
+		},
+		{
+			"name": "LIST_DOCUMETNS-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": ""
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YOUR_JWT_TOKEN"
+					}
+				],
+				"url": "http://localhost:3000/documents"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_DOCUMENT_BY_ID-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZDRkNTczMy0wYWRiLTRlMjUtYWEwYi1jODgzYjlkOWU5MzEiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI1Nzk5NSwiZXhwIjoxNzQzMzQ0Mzk1fQ.OOJwEBGo-U2z4PuDAnq0IrxDmdxToqSwdOWj7ewKs0U"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": {
+					"raw": "http://localhost:3000/documents/50a1cb79-f43e-4615-9b90-cee8277375c3?Content-Type=application/pdf",
+					"protocol": "http",
+					"host": [
+						"localhost"
+					],
+					"port": "3000",
+					"path": [
+						"documents",
+						"50a1cb79-f43e-4615-9b90-cee8277375c3"
+					],
+					"query": [
+						{
+							"key": "Content-Type",
+							"value": "application/pdf"
+						}
+					]
+				}
+			},
+			"response": []
+		},
+		{
+			"name": "VIEW_DOCUMENT_BY_ID-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjNTJlYTM5Ny02M2MxLTQ4YTItODhlYy1hOGY2MzA4NzFmZGIiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoiYWRtaW4iLCJpYXQiOjE3NDMyNjY4MjIsImV4cCI6MTc0MzM1MzIyMn0.t3ILEkGus3wpmACQkwd5N0eAjtckcCkY-nygmynRgkI"
+					}
+				},
+				"method": "GET",
+				"header": [
+					{
+						"key": "Authorization",
+						"value": "Bearer YOUR_JWT_TOKEN"
+					}
+				],
+				"url": "http://localhost:3000/documents/ba7fa6ae-dd5c-4511-aea6-897cbf34658a/view"
+			},
+			"response": []
+		},
+		{
+			"name": "INGESTION_JOBS-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZDRkNTczMy0wYWRiLTRlMjUtYWEwYi1jODgzYjlkOWU5MzEiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI1Nzk5NSwiZXhwIjoxNzQzMzQ0Mzk1fQ.OOJwEBGo-U2z4PuDAnq0IrxDmdxToqSwdOWj7ewKs0U"
+					}
+				},
+				"method": "POST",
+				"header": [
+					{
+						"key": "Content-Type",
+						"value": "application/json"
+					}
+				],
+				"body": {
+					"mode": "raw",
+					"raw": "{\n    \"documentId\": \"50a1cb79-f43e-4615-9b90-cee8277375c3\",\n    \"options\": {\n        \"priority\": \"high\"\n    }\n}",
+					"options": {
+						"raw": {
+							"language": "json"
+						}
+					}
+				},
+				"url": "http://localhost:3000/ingestion/jobs"
+			},
+			"response": []
+		},
+		{
+			"name": "GET_INGESTION_JOBS_BY_ID-API",
+			"request": {
+				"auth": {
+					"type": "bearer",
+					"bearer": {
+						"token": "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJzdWIiOiJjZDRkNTczMy0wYWRiLTRlMjUtYWEwYi1jODgzYjlkOWU5MzEiLCJlbWFpbCI6InBpeXVzaGNvZGVzNkBnbWFpbC5jb20iLCJyb2xlIjoidXNlciIsImlhdCI6MTc0MzI1Nzk5NSwiZXhwIjoxNzQzMzQ0Mzk1fQ.OOJwEBGo-U2z4PuDAnq0IrxDmdxToqSwdOWj7ewKs0U"
+					}
+				},
+				"method": "GET",
+				"header": [],
+				"url": "http://localhost:3000/ingestion/jobs/e94acefe-b1f8-47d4-aa60-3630b1a4b86b"
+			},
+			"response": []
+		}
+	]
+}
