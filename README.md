@@ -105,10 +105,12 @@ src/
 ### Documents
 - POST /documents - Upload document
 - GET /documents - List documents
-- GET /documents/:id - Get document
+- GET /documents/:id - Get document metadata
+- GET /documents/:id/view - View/download document file
 - PUT /documents/:id - Update document
 - DELETE /documents/:id - Delete document
 
+Note: The /documents/:id/view endpoint streams the actual document file and supports inline viewing for supported file types (PDFs, text files, etc.).
 ### Health
 - GET /health - Check application health
 
